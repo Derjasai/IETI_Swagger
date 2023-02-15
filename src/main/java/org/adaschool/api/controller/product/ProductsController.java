@@ -24,11 +24,11 @@ public class ProductsController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(Product product) {
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         //TODO implement this method
-        productsService.save(product);
-        URI createdProductUri = URI.create("");
-        return ResponseEntity.created(createdProductUri).body(null);
+        Product newProduct = productsService.save(product);
+        URI createdProductUri = URI.create(product.getId());
+        return ResponseEntity.created(createdProductUri).body(newProduct);
     }
 
     @GetMapping
